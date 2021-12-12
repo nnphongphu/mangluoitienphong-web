@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { H5 } from "./Theme";
 
 export const NavBar = () => {
   return (
@@ -37,13 +38,17 @@ const Menu = styled.li`
   justify-content: space-between;
   align-items: center;
   column-gap: 85px;
+
+  @media screen and (max-width: 1600px) {
+    column-gap: 50px;
+  }
+
+  @media screen and (max-width: 1300px) {
+    column-gap: 30px;
+  }
 `;
 
-const Item = styled.ul`
-  font-style: normal;
-  font-weight: 600;
-  font-size: 24px;
-  letter-spacing: 0.1em;
+const Item = styled(H5)`
   text-transform: uppercase;
   color: #c82127;
   cursor: pointer;
