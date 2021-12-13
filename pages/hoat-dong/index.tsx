@@ -144,7 +144,7 @@ const HighlightsWrapper = styled.div`
       rgba(200, 33, 39, 0.7),
       rgba(200, 33, 39, 0.7)
     ),
-    url(\activityCover.png);
+    url(${"/activityCover.png"});
   background-color: red;
   background-repeat: no-repeat;
   background-position: bottom center;

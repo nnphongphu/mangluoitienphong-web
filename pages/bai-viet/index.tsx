@@ -156,9 +156,7 @@ const ArticlesCardWrapper = styled.div`
 const Banner = () => {
   return (
     <BannerWrapper>
-      <H1 style={{ color: "white", textTransform: "uppercase" }}>
-        Hoạt động nổi bật
-      </H1>
+      <H1 style={{ color: "white", textTransform: "uppercase" }}>Bài viết</H1>
       <BannerLayout>
         <BigCard style={{ gridArea: "a" }} src="/article.png">
           <ImageText>Lorem ipsum dolor sit amet</ImageText>
@@ -244,7 +242,7 @@ const BannerWrapper = styled.div`
       rgba(200, 33, 39, 0.7),
       rgba(200, 33, 39, 0.7)
     ),
-    url(\activityCover.png);
+    url(${"/activityCover.png"});
   background-color: red;
   background-repeat: no-repeat;
   background-size: cover;
