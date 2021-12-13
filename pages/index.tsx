@@ -424,7 +424,9 @@ const LandingSection = () => {
       <LandingText>
         mạng lưới <br /> tiên phong
       </LandingText>
-      <H4>vì tiếng nói của người dân tộc thiểu số</H4>
+      <H4 style={{ color: "var(--red)" }}>
+        vì tiếng nói của người dân tộc thiểu số
+      </H4>
     </LandingWrapper>
   );
 };

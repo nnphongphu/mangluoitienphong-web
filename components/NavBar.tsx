@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { H5 } from "./Theme";
+import Link from "next/link";
 
 export const NavBar = () => {
   return (
@@ -11,9 +12,17 @@ export const NavBar = () => {
         style={{ cursor: "pointer" }}
       />
       <Menu>
-        <Item>Trang chủ</Item>
-        <Item>Hoạt động</Item>
-        <Item>Bài viết</Item>
+        <Link href="/" passHref>
+          <a>
+            <Item>Trang chủ</Item>
+          </a>
+        </Link>
+        <Link href="/hoat-dong" passHref>
+          <Item>Hoạt động</Item>
+        </Link>
+        <Link href="/bai-viet" passHref>
+          <Item>Bài viết</Item>
+        </Link>
         <Item>Sản phẩm</Item>
         <Item>Liên hệ</Item>
         <SpecialItem>VI</SpecialItem>
