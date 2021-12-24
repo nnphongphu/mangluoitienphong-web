@@ -3,19 +3,23 @@ import Image from "next/image";
 import styles from "../styles/Home.module.css";
 import NavBar from "../components/NavBar";
 import styled from "styled-components";
-import { H1, H4, H5 } from "../components/Theme";
+import { ButtonText, H1, H2, H4, H5 } from "../components/Theme";
+import useWindowDimensions from "../hooks/useWindowDimensions";
 
 export default function Home() {
+  // const { width, height } = useWindowDimensions();
   return (
-    <Wrapper>
+    <>
       <NavBar />
-      <LandingSection />
-      <IntroductionSection />
-      <IdentitySection />
-      <ActivitySection />
-      <ParticipantsSection />
-      <PartnerSection />
-    </Wrapper>
+      <Wrapper>
+        <LandingSection />
+        <IntroductionSection />
+        <IdentitySection />
+        <ActivitySection />
+        <ParticipantsSection />
+        <PartnerSection />
+      </Wrapper>
+    </>
   );
 }
 
@@ -23,9 +27,60 @@ const Wrapper = styled.div`
   width: calc(100vw - (100vw - 100%));
   max-width: 1920px;
   margin: auto;
+  overflow: hidden;
+`;
+
+const BreakLine = styled.div`
+  width: 100%;
+  height: 3px;
+  background-color: var(--yellow);
 `;
 
 const ParticipantsSection = () => {
+  const { width, height } = useWindowDimensions();
+  if (width <= 1200) {
+    return (
+      <ParticipantsWrapper>
+        <H2
+          style={{
+            color: "var(--red)",
+            textAlign: "left",
+            fontWeight: "bold",
+            margin: "30px 0px",
+          }}
+        >
+          CHIA SẺ CỦA NGƯỜI THAM GIA
+        </H2>
+        <div
+          style={{ display: "flex", flexDirection: "column", rowGap: "50px" }}
+        >
+          <Participant
+            name="Nguyen Van A"
+            content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce venenatis eget lacus quis malesuada. Curabitur nisl dolor, maximus nec odio nec, commodo elementum ligula. Pellentesque tincidunt nec lorem eu varius."
+            avatar="/participant.png"
+          />
+          <BreakLine />
+          <Participant
+            name="Nguyen Van A"
+            content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce venenatis eget lacus quis malesuada. Curabitur nisl dolor, maximus nec odio nec, commodo elementum ligula. Pellentesque tincidunt nec lorem eu varius."
+            avatar="/participant.png"
+          />
+          <BreakLine />
+          <Participant
+            name="Nguyen Van A"
+            content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce venenatis eget lacus quis malesuada. Curabitur nisl dolor, maximus nec odio nec, commodo elementum ligula. Pellentesque tincidunt nec lorem eu varius."
+            avatar="/participant.png"
+          />
+          <BreakLine />
+          <Participant
+            name="Nguyen Van A"
+            content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce venenatis eget lacus quis malesuada. Curabitur nisl dolor, maximus nec odio nec, commodo elementum ligula. Pellentesque tincidunt nec lorem eu varius."
+            avatar="/participant.png"
+          />
+        </div>
+      </ParticipantsWrapper>
+    );
+  }
   return (
     <ParticipantsWrapper>
       <H2
@@ -65,6 +120,7 @@ const ParticipantsSection = () => {
 };
 
 const Participant = ({ name, avatar, content }) => {
+  const { width } = useWindowDimensions();
   return (
     <ParticipantWrapper>
       <H5>{content}</H5>
@@ -73,8 +129,8 @@ const Participant = ({ name, avatar, content }) => {
           style={{
             backgroundImage: `url(${avatar})`,
             backgroundSize: "cover",
-            width: "100px",
-            height: "100px",
+            width: width <= 1200 ? "60px" : "100px",
+            height: width <= 1200 ? "60px" : "100px",
             borderRadius: "50%",
           }}
         />
@@ -114,6 +170,10 @@ const ParticipantsWrapper = styled.div`
   @media screen and (max-width: 1500px) {
     padding: 30px 100px 30px 100px;
   }
+
+  @media screen and (max-width: 1200px) {
+    padding: 30px;
+  }
 `;
 
 const IdentityWrapper = styled.div`
@@ -128,6 +188,17 @@ const IdentityWrapper = styled.div`
   background-position: top right;
   @media screen and (max-width: 1500px) {
     padding: 100px 100px 0px 100px;
+  }
+
+  @media screen and (max-width: 1200px) {
+    flex-direction: column;
+    padding: 30px 30px 0px 30px;
+    row-gap: 30px;
+    height: auto;
+
+    @media screen and (max-width: 900px) {
+      row-gap: 20px;
+    }
   }
 `;
 
@@ -149,28 +220,78 @@ const ButtonWrapper = styled.div`
   bottom: 0;
 `;
 
-const SquareButton = styled.div<{ color: string }>`
+const SquareButton = styled(ButtonText)<{ color: string }>`
   width: 315px;
   height: 170px;
-  font-family: Fira Sans;
   background-color: ${({ color }) => color};
   color: white;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-weight: 600;
-  font-size: 24px;
-  line-height: 29px;
-  letter-spacing: 0.1em;
   text-transform: uppercase;
   padding: 40px;
+
+  @media screen and (max-width: 900px) {
+    padding: 20px;
+    height: auto;
+  }
 `;
 
 const IdentitySection = () => {
+  const { width, height } = useWindowDimensions();
+  if (width <= 1200) {
+    return (
+      <IdentityWrapper>
+        <H2
+          style={{
+            textAlign: "left",
+            color: "white",
+            textTransform: "uppercase",
+          }}
+        >
+          Mạng lưới Tiên Phong là gì?
+        </H2>
+        <H4 style={{ color: "white", textAlign: "left" }}>
+          1. Lorem ipsum dolor
+        </H4>
+        <B style={{ textAlign: "left", width: "100%" }}>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ipsum
+          arcu, semper ut magna eget, lobortis ultrices massa. Suspendisse
+          facilisis felis eu nisl sollicitudin suscipit. Pellentesque habitant
+          morbi tristique senectus et netus et malesuada fam
+        </B>
+        <H4 style={{ color: "white", textAlign: "left" }}>
+          2. Lorem ipsum dolor sit amet
+        </H4>
+        <B style={{ textAlign: "left", width: "100%" }}>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ipsum
+          arcu, semper ut magna eget, lobortis ultrices massa. Suspendisse
+          facilisis felis eu nisl sollicitudin suscipit. Pellentesque habitant
+          morbi tristique senectus et netus et malesuada fam
+        </B>
+        <Sticker>
+          Mạng lưới kết nối X người đến từ X tỉnh, thành phố khắp Việt Nam
+        </Sticker>
+        <Sticker style={{ alignSelf: "flex-end" }}>
+          Có X dân tộc đã tham gia vào Mạng lưới Tiên Phong
+        </Sticker>
+        <div
+          style={{ display: "flex", width: "100%", justifyContent: "center" }}
+        >
+          <SquareButton color="#C82127">Đọc thêm về Tiên Phong</SquareButton>
+          <SquareButton color="#EE5A2A">
+            Xem sản phẩm của chúng tôi
+          </SquareButton>
+        </div>
+      </IdentityWrapper>
+    );
+  }
   return (
     <IdentityWrapper>
       <IdentityContent>
-        <H2 style={{ textAlign: "left" }}>Mạng lưới Tiên Phong là gì?</H2>
+        <H2 style={{ textAlign: "left", color: "white" }}>
+          Mạng lưới Tiên Phong là gì?
+        </H2>
         <H4 style={{ color: "white", textAlign: "left" }}>
           1. Lorem ipsum dolor
         </H4>
@@ -213,7 +334,7 @@ const IdentityStickers = styled.div`
   row-gap: 50px;
 `;
 
-const Sticker = styled.div`
+const Sticker = styled(H5)`
   width: 407px;
   height: 178px;
   background: #ffffff;
@@ -222,12 +343,17 @@ const Sticker = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  font-style: normal;
-  font-family: Fira Sans;
-  font-weight: normal;
-  font-size: 24px;
-  line-height: 29px;
   padding: 30px;
+
+  @media screen and (max-width: 1200px) {
+    width: 60vw;
+  }
+
+  @media screen and (max-width: 900px) {
+    padding: 20px;
+    height: 100px;
+    width: 60vw;
+  }
 `;
 
 const ActivityWrapper = styled.div`
@@ -239,6 +365,10 @@ const ActivityWrapper = styled.div`
     padding: 30px 100px 30px 100px;
   }
   row-gap: 30px;
+
+  @media screen and (max-width: 1200px) {
+    padding: 30px;
+  }
 `;
 
 const Button = styled.div`
@@ -308,6 +438,41 @@ const ImageCard = styled.div<{ src: string }>`
 `;
 
 const ActivitySection = () => {
+  const { width, height } = useWindowDimensions();
+  if (width <= 1200) {
+    return (
+      <ActivityWrapper>
+        <H2
+          style={{
+            color: "var(--red)",
+            textAlign: "left",
+            fontWeight: "bold",
+            margin: "30px 0px",
+            textTransform: "uppercase",
+          }}
+        >
+          Các hoạt động của Mạng lưới Tiên Phong
+        </H2>
+        <div
+          style={{
+            width: "75%",
+            alignSelf: "center",
+            rowGap: "30px",
+            display: "flex",
+            flexDirection: "column",
+          }}
+        >
+          <ImageCard src="/activity.png">
+            <ImageText>Lorem ipsum dolor sit amet.</ImageText>
+          </ImageCard>
+          <ImageCard src="/activity.png">
+            <ImageText>Lorem ipsum dolor sit amet</ImageText>
+          </ImageCard>
+        </div>
+        <Button> Xem thêm </Button>
+      </ActivityWrapper>
+    );
+  }
   return (
     <ActivityWrapper>
       <H2
@@ -344,8 +509,12 @@ const IntroductionWrapper = styled.div`
   justify-content: space-between;
   align-items: center;
 
-  @media screen and (max-width: 1500px) {
-    padding: 0px 100px;
+  @media screen and (max-width: 1200px) {
+    padding: 0px 30px 0px 30px;
+  }
+
+  @media screen and (max-width: 900px) {
+    padding: 0px 30px 100px 30px;
   }
 `;
 
@@ -357,16 +526,16 @@ const Column = styled.div`
   flex-direction: column;
   row-gap: 40px;
   margin: 30px 0px 50px 0px;
-`;
+  @media screen and (max-width: 900px) {
+    margin: 0px;
+    width: 100%;
+    align-items: flex-start;
+    row-gap: 20px;
+  }
 
-const H2 = styled.h2`
-  font-family: Fira Sans;
-  font-weight: 500;
-  font-size: 64px;
-  line-height: 77px;
-  text-align: center;
-  color: #ffffff;
-  margin: 0;
+  @media screen and (max-width: 500px) {
+    row-gap: 10px;
+  }
 `;
 
 const B = styled.b`
@@ -386,13 +555,58 @@ const ReverseTriangle = styled.div`
   border-right: 80px solid transparent;
   border-top: 130px solid white;
   align-self: flex-start;
+  @media screen and (max-width: 1200px) {
+    border-left: 60px solid transparent;
+    border-right: 60px solid transparent;
+    border-top: 100px solid white;
+  }
+
+  @media screen and (max-width: 900px) {
+    border-left: 50px solid transparent;
+    border-right: 50px solid transparent;
+    border-top: 80px solid white;
+  }
+
+  @media screen and (max-width: 500px) {
+    border-left: 40px solid transparent;
+    border-right: 40px solid transparent;
+    border-top: 70px solid white;
+  }
 `;
 
 const IntroductionSection = () => {
+  const { width, height } = useWindowDimensions();
+  if (width <= 900) {
+    return (
+      <IntroductionWrapper>
+        <Column>
+          <ReverseTriangle />
+          <H2 style={{ textAlign: "left", color: "white" }}>CÂU CHUYỆN</H2>
+          <B style={{ textAlign: "left" }}>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam
+            ipsum arcu, semper ut magna eget, lobortis ultrices massa.
+            Suspendisse facilisis felis eu nisl sollicitudin suscipit.
+            Pellentesque habitant morbi tristique senectus et netus et malesuada
+            fames ac turpis egestas. Mauris elementum ex ac enim luctus
+            scelerisque. Etiam ac congue risus.
+          </B>
+          <H2 style={{ textAlign: "left", color: "white" }}>SỨ MỆNH</H2>
+          <B style={{ textAlign: "left" }}>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam
+            ipsum arcu, semper ut magna eget, lobortis ultrices massa.
+            Suspendisse facilisis felis eu nisl sollicitudin suscipit.
+            Pellentesque habitant morbi tristique senectus et netus et malesuada
+            fames ac turpis egestas. Mauris elementum ex ac enim luctus
+            scelerisque. Etiam ac congue risus.
+          </B>
+        </Column>
+      </IntroductionWrapper>
+    );
+  }
   return (
     <IntroductionWrapper>
       <Column>
-        <H2>Câu chuyện</H2>
+        <H2 style={{ color: "white" }}>CÂU CHUYỆN</H2>
         <B>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ipsum
           arcu, semper ut magna eget, lobortis ultrices massa. Suspendisse
@@ -404,7 +618,7 @@ const IntroductionSection = () => {
       </Column>
       <ReverseTriangle />
       <Column>
-        <H2>Sứ mệnh</H2>
+        <H2 style={{ color: "white" }}>SỨ MỆNH</H2>
         <B>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ipsum
           arcu, semper ut magna eget, lobortis ultrices massa. Suspendisse
@@ -424,12 +638,31 @@ const LandingSection = () => {
       <LandingText>
         mạng lưới <br /> tiên phong
       </LandingText>
-      <H4 style={{ color: "var(--red)" }}>
-        vì tiếng nói của người dân tộc thiểu số
-      </H4>
+      <Subtitle>vì tiếng nói của người dân tộc thiểu số</Subtitle>
     </LandingWrapper>
   );
 };
+
+const Subtitle = styled.span`
+  color: var(--red);
+  font-family: Fira Sans;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 36px;
+  margin: 0px;
+
+  @media screen and (max-width: 900px) {
+    font-size: 25px;
+  }
+
+  @media screen and (max-width: 500px) {
+    font-size: 16px;
+  }
+
+  @media screen and (max-width: 300px) {
+    font-size: 12px;
+  }
+`;
 
 const LandingWrapper = styled.div`
   width: calc(100vw - (100vw - 100%));
@@ -442,6 +675,13 @@ const LandingWrapper = styled.div`
   margin-top: 10px;
   min-height: 600px;
   max-height: 1080px;
+
+  @media screen and (max-width: 900px) {
+    height: auto;
+    padding: 30px 0px 50px 0px;
+    min-height: 300px;
+    max-height: 700px;
+  }
 `;
 
 const LandingText = styled(H1)`
@@ -451,6 +691,18 @@ const LandingText = styled(H1)`
   text-align: center;
   font-weight: bolder;
   margin: 0;
+
+  @media screen and (max-width: 900px) {
+    font-size: 100px;
+  }
+
+  @media screen and (max-width: 700px) {
+    font-size: 70px;
+  }
+
+  @media screen and (max-width: 400px) {
+    font-size: 40px;
+  }
 `;
 
 const PartnerSection = () => {

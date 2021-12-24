@@ -1,8 +1,32 @@
 import styled from "styled-components";
-import { H5 } from "./Theme";
+import { H5, ButtonText } from "./Theme";
 import Link from "next/link";
+import useWindowDimensions from "../hooks/useWindowDimensions";
+import { GiHamburgerMenu } from "react-icons/gi";
 
 export const NavBar = () => {
+  const { height, width } = useWindowDimensions();
+
+  if (width <= 1200) {
+    return (
+      <Wrapper>
+        <img
+          src="logo.png"
+          width={`${width <= 900 ? "50px" : "120px"}`}
+          height={`${width <= 900 ? "50px" : "120px"}`}
+          style={{ cursor: "pointer" }}
+        />
+        <Menu>
+          <SpecialItem>VI</SpecialItem>
+          <GiHamburgerMenu
+            color="var(--red)"
+            size={`${width <= 900 ? "30px" : "60px"}`}
+          />
+        </Menu>
+      </Wrapper>
+    );
+  }
+
   return (
     <Wrapper>
       <img
@@ -38,8 +62,24 @@ const Wrapper = styled.nav`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  z-index: 9999;
+  max-width: 1920px;
+  margin: auto;
+
   background-color: white;
   box-shadow: 0px 4px 6px 3px rgba(0, 0, 0, 0.05);
+
+  @media screen and (max-width: 1200px) {
+    padding: 30px;
+  }
+
+  @media screen and (max-width: 900px) {
+    height: 60px;
+    padding: 30px;
+  }
 `;
 
 const Menu = styled.li`
@@ -64,21 +104,21 @@ const Item = styled(H5)`
   padding: 0;
 `;
 
-const SpecialItem = styled.ul`
+const SpecialItem = styled(ButtonText)`
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 3px 15px;
   border: 1px solid #c82127;
   border-radius: 21px;
-  font-style: normal;
-  font-weight: 600;
-  font-size: 24px;
-  line-height: 29px;
-  letter-spacing: 0.1em;
   text-transform: uppercase;
   color: #c82127;
   cursor: pointer;
+
+  @media screen and (max-width: 900px) {
+    padding: 0px 10px;
+    font-size: 16px;
+  }
 `;
 
 export default NavBar;

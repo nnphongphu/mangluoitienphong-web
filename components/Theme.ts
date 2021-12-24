@@ -5,11 +5,18 @@ export const H1 = styled.h1`
   font-style: normal;
   font-weight: bold;
   font-size: 96px;
-  line-height: 115px;
   color: #000000;
 
-  @media screen and (max-width: 441px) {
-    font-size: 34;
+  @media screen and (max-width: 1500px) {
+    font-size: 70px;
+  }
+
+  @media screen and (max-width: 1200px) {
+    font-size: 50px;
+  }
+
+  @media screen and (max-width: 500px) {
+    font-size: 26px;
   }
 `;
 
@@ -18,11 +25,14 @@ export const H2 = styled.h2`
   font-style: normal;
   font-weight: bold;
   font-size: 64px;
-  line-height: 77px;
   color: #000000;
 
-  @media screen and (max-width: 411px) {
-    font-size: 28px;
+  @media screen and (max-width: 1300px) {
+    font-size: 35px;
+  }
+
+  @media screen and (max-width: 500px) {
+    font-size: 22px;
   }
 `;
 
@@ -31,11 +41,10 @@ export const H3 = styled.h3`
   font-style: normal;
   font-weight: normal;
   font-size: 48px;
-  line-height: 58px;
   color: #000000;
 
-  @media screen and (max-width: 411px) {
-    font-size: 24px;
+  @media screen and (max-width: 500px) {
+    font-size: 20px;
   }
 `;
 
@@ -44,12 +53,15 @@ export const H4 = styled.h4`
   font-style: normal;
   font-weight: bold;
   font-size: 36px;
-  line-height: 43px;
   color: #000000;
   margin: 0px;
 
-  @media screen and (max-width: 411px) {
-    font-size: 20px;
+  @media screen and (max-width: 1200px) {
+    font-size: 18px;
+  }
+
+  @media screen and (max-width: 500px) {
+    font-size: 16px;
   }
 `;
 
@@ -58,11 +70,10 @@ export const H5 = styled.h5`
   font-style: normal;
   font-weight: 600;
   font-size: 24px;
-  line-height: 29px;
   color: #000000;
 
-  @media screen and (max-width: 411px) {
-    font-size: 17px;
+  @media screen and (max-width: 500px) {
+    font-size: 14px;
   }
 `;
 
@@ -71,12 +82,11 @@ export const ButtonText = styled.span`
   font-style: normal;
   font-weight: 600;
   font-size: 24px;
-  line-height: 29px;
   letter-spacing: 0.1em;
   color: #000000;
 
-  @media screen and (max-width: 411px) {
-    font-size: 17px;
+  @media screen and (max-width: 500px) {
+    font-size: 12px;
   }
 `;
 
@@ -85,10 +95,9 @@ export const Body = styled.p`
   font-style: normal;
   font-weight: normal;
   font-size: 18px;
-  line-height: 22px;
   color: #000000;
 
-  @media screen and (max-width: 411px) {
-    font-size: 15px;
+  @media screen and (max-width: 500px) {
+    font-size: 14px;
   }
 `;
