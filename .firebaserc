@@ -1,5 +1,14 @@
 {
   "projects": {
     "default": "mangluoitienphong-de378"
+  },
+  "targets": {
+    "mangluoitienphong-de378": {
+      "hosting": {
+        "mangluoitienphong": [
+          "mangluoitienphong"
+        ]
+      }
+    }
   }
 }

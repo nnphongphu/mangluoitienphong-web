@@ -1,27 +1,81 @@
 import Head from "next/head";
-import Image from "next/image";
-import styles from "../styles/Home.module.css";
 import NavBar from "../components/NavBar";
 import styled from "styled-components";
-import { ButtonText, H1, H2, H4, H5 } from "../components/Theme";
+import { ButtonText, H1, H2, H4, H5, Loading } from "../components/Theme";
 import useWindowDimensions from "../hooks/useWindowDimensions";
+import Link from "next/link";
+import useGetUpdates from "../hooks/useGetUpdates";
+import Slider from "react-slick";
+import { useRef } from "react";
+import useGetParticipants from "../hooks/useGetParticipants";
 
 export default function Home() {
   // const { width, height } = useWindowDimensions();
   return (
     <>
+      <Head>
+        <title>Mạng lưới Tiên phong</title>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      </Head>
       <NavBar />
       <Wrapper>
         <LandingSection />
         <IntroductionSection />
-        <IdentitySection />
+        <VideoSection />
         <ActivitySection />
+        <PlaylistSection />
         <ParticipantsSection />
         <PartnerSection />
       </Wrapper>
     </>
   );
 }
+
+const PlaylistSection = () => {
+  const { height, width } = useWindowDimensions();
+  return (
+    <ActivityWrapper>
+      <H2
+        style={{
+          color: "var(--color-red)",
+          textAlign: "left",
+          fontWeight: "bold",
+          margin: "30px 0px",
+          textTransform: "uppercase",
+        }}
+      >
+        HOẠT ĐỘNG
+      </H2>
+      <iframe
+        width="100%"
+        height={width <= 900 ? "300px" : "700px"}
+        src="https://www.youtube.com/embed/videoseries?list=PLKmVSxKwU5E32Lrg9SvQGT_GMbH-Piyrb"
+        title="YouTube video player"
+        frameBorder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowFullScreen
+      ></iframe>
+    </ActivityWrapper>
+  );
+};
+
+const VideoSection = () => {
+  return (
+    <>
+      <Video autoPlay muted loop>
+        <source src="/intro.mp4" type="video/mp4" />
+      </Video>
+    </>
+  );
+};
+
+const Video = styled.video`
+  width: 100vw;
+  height: auto;
+  pointer-events: none;
+  object-fit: cover;
+  min-height: 300px;
+`;
 
 const Wrapper = styled.div`
   width: calc(100vw - (100vw - 100%));
@@ -30,144 +84,145 @@ const Wrapper = styled.div`
   overflow: hidden;
 `;
 
-const BreakLine = styled.div`
-  width: 100%;
-  height: 3px;
-  background-color: var(--yellow);
+const SlickSlider = styled(Slider)`
+  width: 90%;
+  transition: none;
+
+  @media screen and (max-width: 900px) {
+    width: 80%;
+  }
 `;
 
 const ParticipantsSection = () => {
   const { width, height } = useWindowDimensions();
-  if (width <= 1200) {
-    return (
-      <ParticipantsWrapper>
-        <H2
-          style={{
-            color: "var(--red)",
-            textAlign: "left",
-            fontWeight: "bold",
-            margin: "30px 0px",
-          }}
-        >
-          CHIA SẺ CỦA NGƯỜI THAM GIA
-        </H2>
-        <div
-          style={{ display: "flex", flexDirection: "column", rowGap: "50px" }}
-        >
-          <Participant
-            name="Nguyen Van A"
-            content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce venenatis eget lacus quis malesuada. Curabitur nisl dolor, maximus nec odio nec, commodo elementum ligula. Pellentesque tincidunt nec lorem eu varius."
-            avatar="/participant.png"
-          />
-          <BreakLine />
-          <Participant
-            name="Nguyen Van A"
-            content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce venenatis eget lacus quis malesuada. Curabitur nisl dolor, maximus nec odio nec, commodo elementum ligula. Pellentesque tincidunt nec lorem eu varius."
-            avatar="/participant.png"
-          />
-          <BreakLine />
-          <Participant
-            name="Nguyen Van A"
-            content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce venenatis eget lacus quis malesuada. Curabitur nisl dolor, maximus nec odio nec, commodo elementum ligula. Pellentesque tincidunt nec lorem eu varius."
-            avatar="/participant.png"
-          />
-          <BreakLine />
-          <Participant
-            name="Nguyen Van A"
-            content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce venenatis eget lacus quis malesuada. Curabitur nisl dolor, maximus nec odio nec, commodo elementum ligula. Pellentesque tincidunt nec lorem eu varius."
-            avatar="/participant.png"
-          />
-        </div>
-      </ParticipantsWrapper>
-    );
-  }
+  const sliderRef = useRef<any>(null);
+
+  const handleClick = (delta: Number) => {
+    if (delta > 0) {
+      sliderRef.current.slickNext();
+    } else {
+      sliderRef.current.slickPrev();
+    }
+  };
+
+  const settings = {
+    className: "participant-slide",
+    infinite: true,
+    slidesToShow: width <= 900 ? 1 : 3,
+    autoplay: false,
+    arrows: false,
+  };
+
+  const { data } = useGetParticipants();
+
   return (
-    <ParticipantsWrapper>
+    <ParticipantWrapper>
       <H2
         style={{
-          color: "var(--red)",
+          color: "var(--color-red)",
           textAlign: "left",
           fontWeight: "bold",
           margin: "30px 0px",
         }}
       >
-        CHIA SẺ CỦA NGƯỜI THAM GIA
+        CHIA SẺ NGƯỜI THAM GIA
       </H2>
-      <ParticipantsGrid>
-        <Participant
-          name="Nguyen Van A"
-          content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce venenatis eget lacus quis malesuada. Curabitur nisl dolor, maximus nec odio nec, commodo elementum ligula. Pellentesque tincidunt nec lorem eu varius."
-          avatar="/participant.png"
-        />
-        <Participant
-          name="Nguyen Van A"
-          content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce venenatis eget lacus quis malesuada. Curabitur nisl dolor, maximus nec odio nec, commodo elementum ligula. Pellentesque tincidunt nec lorem eu varius."
-          avatar="/participant.png"
-        />
-        <Participant
-          name="Nguyen Van A"
-          content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce venenatis eget lacus quis malesuada. Curabitur nisl dolor, maximus nec odio nec, commodo elementum ligula. Pellentesque tincidunt nec lorem eu varius."
-          avatar="/participant.png"
-        />
-        <Participant
-          name="Nguyen Van A"
-          content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce venenatis eget lacus quis malesuada. Curabitur nisl dolor, maximus nec odio nec, commodo elementum ligula. Pellentesque tincidunt nec lorem eu varius."
-          avatar="/participant.png"
-        />
-      </ParticipantsGrid>
-    </ParticipantsWrapper>
-  );
-};
-
-const Participant = ({ name, avatar, content }) => {
-  const { width } = useWindowDimensions();
-  return (
-    <ParticipantWrapper>
-      <H5>{content}</H5>
-      <ParticipantRow>
+      {data && (
         <div
           style={{
-            backgroundImage: `url(${avatar})`,
-            backgroundSize: "cover",
-            width: width <= 1200 ? "60px" : "100px",
-            height: width <= 1200 ? "60px" : "100px",
-            borderRadius: "50%",
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
           }}
-        />
-        <H4>{name}</H4>
-      </ParticipantRow>
+        >
+          <img
+            src="/prev.png"
+            onClick={() => handleClick(-1)}
+            style={{
+              cursor: "pointer",
+              width: width <= 900 ? "30px" : "50px",
+              height: width <= 900 ? "30px" : "50px",
+            }}
+          />
+          <SlickSlider ref={sliderRef} {...settings}>
+            {data.map((participant) => {
+              return (
+                <Participant key={participant.thumbnailUrl} {...participant} />
+              );
+            })}
+          </SlickSlider>
+          <img
+            src="/next.png"
+            onClick={() => handleClick(1)}
+            style={{
+              cursor: "pointer",
+              width: width <= 900 ? "30px" : "50px",
+              height: width <= 900 ? "30px" : "50px",
+            }}
+          />
+        </div>
+      )}
     </ParticipantWrapper>
   );
 };
 
-const ParticipantWrapper = styled.div`
+const Participant: React.FC<{
+  name: string;
+  content: string;
+  thumbnailUrl: string;
+}> = ({ name, content, thumbnailUrl }) => {
+  const { width } = useWindowDimensions();
+  return (
+    <div
+      style={{
+        padding: width <= 900 ? "50px 0px 0px 0px" : "50px 10px 0px 10px",
+        height: "100%",
+      }}
+    >
+      <SliderItemWrapper>
+        <Avatar src={thumbnailUrl} />
+        <H4 style={{ color: "white ", alignSelf: "center" }}>{name}</H4>
+        <H5
+          style={{ color: "white ", textAlign: "center", paddingTop: "30px" }}
+        >
+          {content}
+        </H5>
+      </SliderItemWrapper>
+    </div>
+  );
+};
+
+const SliderItemWrapper = styled.div`
+  width: 100%;
+  height: 100%;
+  background-color: var(--color-dark-red);
   display: flex;
   flex-direction: column;
-  row-gap: 30px;
+  position: relative;
+  padding: 80px 15px 30px 15px;
 `;
 
-const ParticipantRow = styled.div`
-  display: flex;
-  column-gap: 30px;
-  align-items: center;
+const Avatar = styled.div<{ src: string }>`
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  position: absolute;
+  background-image: url(${({ src }) => src});
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
 `;
 
-const ParticipantsGrid = styled.div`
-  width: 100%;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  column-gap: 130px;
-  row-gap: 130px;
-`;
-
-const ParticipantsWrapper = styled.div`
+const ParticipantWrapper = styled.div`
   width: calc(100vw - (100vw - 100%));
   display: flex;
   flex-direction: column;
   padding: 30px 130px 30px 130px;
-  row-gap: 30px;
 
-  @media screen and (max-width: 1500px) {
+  @media screen and (max-width: 1600px) {
     padding: 30px 100px 30px 100px;
   }
 
@@ -398,7 +453,7 @@ const ImageWrapper = styled.div`
   column-gap: 100px;
 
   @media screen and (max-width: 1700px) {
-    column-gap: 30px;
+    column-gap: 50px;
   }
 `;
 
@@ -416,11 +471,12 @@ const ImageText = styled(H4)`
   text-overflow: ellipsis;
 `;
 
-const ImageCard = styled.div<{ src: string }>`
+const ImageCard = styled.a<{ src: string }>`
   background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
     url(${({ src }) => src});
   background-repeat: no-repeat;
   background-size: cover;
+  background-position: center center;
   display: flex;
   align-items: center;
   text-align: center;
@@ -430,73 +486,70 @@ const ImageCard = styled.div<{ src: string }>`
   align-items: flex-end;
   position: relative;
 
-  box-shadow: 0px 0px 0px var(--yellow) inset;
+  box-shadow: 0px 0px 0px var(--color-yellow) inset;
   transition: all ease-in-out 0.2s;
   &:hover {
-    box-shadow: 0px -150px 0px var(--yellow) inset;
+    box-shadow: 0px -150px 0px var(--color-yellow) inset;
+
+    @media screen and (max-width: 1300px) {
+      box-shadow: 0px -110px 0px var(--color-yellow) inset;
+    }
+
+    @media screen and (max-width: 1000px) {
+      box-shadow: 0px -100px 0px var(--color-yellow) inset;
+    }
+
+    @media screen and (max-width: 500px) {
+      box-shadow: 0px -75px 0px var(--color-yellow) inset;
+    }
+  }
+
+  @media screen and (max-width: 500px) {
+    margin-bottom: 30px;
   }
 `;
 
 const ActivitySection = () => {
-  const { width, height } = useWindowDimensions();
-  if (width <= 1200) {
-    return (
-      <ActivityWrapper>
-        <H2
-          style={{
-            color: "var(--red)",
-            textAlign: "left",
-            fontWeight: "bold",
-            margin: "30px 0px",
-            textTransform: "uppercase",
-          }}
-        >
-          Các hoạt động của Mạng lưới Tiên Phong
-        </H2>
-        <div
-          style={{
-            width: "75%",
-            alignSelf: "center",
-            rowGap: "30px",
-            display: "flex",
-            flexDirection: "column",
-          }}
-        >
-          <ImageCard src="/activity.png">
-            <ImageText>Lorem ipsum dolor sit amet.</ImageText>
-          </ImageCard>
-          <ImageCard src="/activity.png">
-            <ImageText>Lorem ipsum dolor sit amet</ImageText>
-          </ImageCard>
-        </div>
-        <Button> Xem thêm </Button>
-      </ActivityWrapper>
-    );
-  }
+  const { width } = useWindowDimensions();
+  const { data, isLoading } = useGetUpdates();
+
   return (
     <ActivityWrapper>
       <H2
         style={{
-          color: "var(--red)",
+          color: "var(--color-red)",
           textAlign: "left",
           fontWeight: "bold",
           margin: "30px 0px",
         }}
       >
-        Các hoạt động của Mạng lưới Tiên Phong
+        CẬP NHẬT
       </H2>
-      <ImageWrapper>
-        <ImageCard src="/activity.png">
-          <ImageText>Lorem ipsum dolor sit amet.</ImageText>
-        </ImageCard>
-        <ImageCard src="/activity.png">
-          <ImageText>Lorem ipsum dolor sit amet</ImageText>
-        </ImageCard>
-        <ImageCard src="/activity.png">
-          <ImageText>Lorem ipsum dolor sit amet</ImageText>
-        </ImageCard>
-      </ImageWrapper>
-      <Button> Xem thêm </Button>
+      {isLoading && <Loading color="var(--color-red)" />}
+      {!isLoading && data && (
+        <ImageWrapper
+          style={{
+            display: width <= 500 ? "flex" : "grid",
+            gridTemplateColumns: width <= 900 ? "1fr 1fr" : "1fr 1fr 1fr",
+            flexDirection: "column",
+          }}
+        >
+          {data.map((update, index) => {
+            if (width <= 900 && width > 500 && index === 2) return null;
+            return (
+              <Link
+                key={index}
+                href={`/${update.type}/${update.titleKebabCase}`}
+                passHref
+              >
+                <ImageCard src={update.thumbnailUrl}>
+                  <ImageText>{update.title}</ImageText>
+                </ImageCard>
+              </Link>
+            );
+          })}
+        </ImageWrapper>
+      )}
     </ActivityWrapper>
   );
 };
@@ -514,27 +567,19 @@ const IntroductionWrapper = styled.div`
   }
 
   @media screen and (max-width: 900px) {
-    padding: 0px 30px 100px 30px;
+    padding: 0px 15px 0px 15px;
+    flex-direction: column;
   }
 `;
 
 const Column = styled.div`
-  width: 30vw;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
-  row-gap: 40px;
-  margin: 30px 0px 50px 0px;
-  @media screen and (max-width: 900px) {
-    margin: 0px;
-    width: 100%;
-    align-items: flex-start;
-    row-gap: 20px;
-  }
 
-  @media screen and (max-width: 500px) {
-    row-gap: 10px;
+  @media screen and (max-width: 900px) {
+    width: 100%;
   }
 `;
 
@@ -553,80 +598,30 @@ const ReverseTriangle = styled.div`
   height: 0;
   border-left: 80px solid transparent;
   border-right: 80px solid transparent;
-  border-top: 130px solid white;
-  align-self: flex-start;
+  border-top: 40px solid white;
+
   @media screen and (max-width: 1200px) {
-    border-left: 60px solid transparent;
-    border-right: 60px solid transparent;
-    border-top: 100px solid white;
-  }
-
-  @media screen and (max-width: 900px) {
-    border-left: 50px solid transparent;
-    border-right: 50px solid transparent;
-    border-top: 80px solid white;
-  }
-
-  @media screen and (max-width: 500px) {
-    border-left: 40px solid transparent;
-    border-right: 40px solid transparent;
-    border-top: 70px solid white;
+    display: none;
   }
 `;
 
 const IntroductionSection = () => {
-  const { width, height } = useWindowDimensions();
-  if (width <= 900) {
-    return (
-      <IntroductionWrapper>
-        <Column>
-          <ReverseTriangle />
-          <H2 style={{ textAlign: "left", color: "white" }}>CÂU CHUYỆN</H2>
-          <B style={{ textAlign: "left" }}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam
-            ipsum arcu, semper ut magna eget, lobortis ultrices massa.
-            Suspendisse facilisis felis eu nisl sollicitudin suscipit.
-            Pellentesque habitant morbi tristique senectus et netus et malesuada
-            fames ac turpis egestas. Mauris elementum ex ac enim luctus
-            scelerisque. Etiam ac congue risus.
-          </B>
-          <H2 style={{ textAlign: "left", color: "white" }}>SỨ MỆNH</H2>
-          <B style={{ textAlign: "left" }}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam
-            ipsum arcu, semper ut magna eget, lobortis ultrices massa.
-            Suspendisse facilisis felis eu nisl sollicitudin suscipit.
-            Pellentesque habitant morbi tristique senectus et netus et malesuada
-            fames ac turpis egestas. Mauris elementum ex ac enim luctus
-            scelerisque. Etiam ac congue risus.
-          </B>
-        </Column>
-      </IntroductionWrapper>
-    );
-  }
+  const { height, width } = useWindowDimensions();
   return (
     <IntroductionWrapper>
+      {width <= 900 && <ReverseTriangle style={{ display: "block" }} />}
+      <H2 style={{ color: "white", marginTop: width <= 900 ? "30px" : "0px" }}>
+        TỰ HÀO - TỰ TIN - TỰ CHỦ
+      </H2>
       <Column>
-        <H2 style={{ color: "white" }}>CÂU CHUYỆN</H2>
-        <B>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ipsum
-          arcu, semper ut magna eget, lobortis ultrices massa. Suspendisse
-          facilisis felis eu nisl sollicitudin suscipit. Pellentesque habitant
-          morbi tristique senectus et netus et malesuada fames ac turpis
-          egestas. Mauris elementum ex ac enim luctus scelerisque. Etiam ac
-          congue risus.
-        </B>
-      </Column>
-      <ReverseTriangle />
-      <Column>
-        <H2 style={{ color: "white" }}>SỨ MỆNH</H2>
-        <B>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ipsum
-          arcu, semper ut magna eget, lobortis ultrices massa. Suspendisse
-          facilisis felis eu nisl sollicitudin suscipit. Pellentesque habitant
-          morbi tristique senectus et netus et malesuada fames ac turpis
-          egestas. Mauris elementum ex ac enim luctus scelerisque. Etiam ac
-          congue risus.
-        </B>
+        <ReverseTriangle />
+        <Link href="/ve-chung-toi" passHref>
+          <ReadMoreButton>
+            <ButtonText style={{ color: "white" }}>
+              ĐỌC THÊM <br /> VỀ TIÊN PHONG
+            </ButtonText>
+          </ReadMoreButton>
+        </Link>
       </Column>
     </IntroductionWrapper>
   );
@@ -635,21 +630,51 @@ const IntroductionSection = () => {
 const LandingSection = () => {
   return (
     <LandingWrapper>
-      <LandingText>
-        mạng lưới <br /> tiên phong
-      </LandingText>
+      {/* <HiddenImage src="hero.jpg" /> */}
+      <LandingText>Mạng lưới Tiên phong</LandingText>
       <Subtitle>vì tiếng nói của người dân tộc thiểu số</Subtitle>
     </LandingWrapper>
   );
 };
 
+// const HiddenImage = styled.div<{ src: string }>`
+//   background: url(${({ src }) => src}) 50% 50% no-repeat fixed;
+//   background-position: center center;
+//   z-index: 1;
+//   position: absolute;
+//   width: 300px;
+//   height: 300px;
+//   background-size: cover;
+//   border-radius: 50%;
+// `;
+
+const ReadMoreButton = styled.a`
+  padding: 30px;
+  width: 300px;
+  background-color: var(--color-yellow);
+  color: white;
+  text-align: center;
+  margin: 25px 0px 75px 0px;
+
+  @media screen and (max-width: 1200px) {
+    margin: 30px 0px;
+  }
+
+  @media screen and (max-width: 900px) {
+    width: 100%;
+    margin: 30px 30px;
+    padding: 15px;
+  }
+`;
+
 const Subtitle = styled.span`
-  color: var(--red);
+  color: var(--color-red);
   font-family: Fira Sans;
   font-style: normal;
   font-weight: bold;
   font-size: 36px;
   margin: 0px;
+  z-index: 2;
 
   @media screen and (max-width: 900px) {
     font-size: 25px;
@@ -666,42 +691,68 @@ const Subtitle = styled.span`
 
 const LandingWrapper = styled.div`
   width: calc(100vw - (100vw - 100%));
-  height: calc(100vh - 138px);
-  background-color: white;
+  height: calc(100vh - 90px);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-top: 10px;
   min-height: 600px;
   max-height: 1080px;
+  z-index: 0;
 
   @media screen and (max-width: 900px) {
-    height: auto;
+    height: calc(100vh - 60px);
     padding: 30px 0px 50px 0px;
     min-height: 300px;
     max-height: 700px;
   }
+
+  @media screen and (max-width: 800px) {
+    height: 300px;
+  }
 `;
 
 const LandingText = styled(H1)`
-  font-size: min(max(20vh, 150px), 200px);
+  font-size: min(max(20vh, 150px), 150px);
   line-height: normal;
   color: #c82127;
   text-align: center;
   font-weight: bolder;
   margin: 0;
+  z-index: 2;
+  background-image: linear-gradient(rgba(255, 0, 0, 0.4), rgba(255, 0, 0, 0.4)),
+    url("/hero.jpg");
+  background-position: center center;
+  background-repeat: repeat;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 
-  @media screen and (max-width: 900px) {
+  @media screen and (max-width: 1600px) {
+    font-size: 130px;
+  }
+
+  @media screen and (max-width: 1400px) {
     font-size: 100px;
   }
 
-  @media screen and (max-width: 700px) {
-    font-size: 70px;
+  @media screen and (max-width: 1200px) {
+    font-size: 80px;
   }
 
-  @media screen and (max-width: 400px) {
-    font-size: 40px;
+  @media screen and (max-width: 1000px) {
+    font-size: 65px;
+  }
+
+  @media screen and (max-width: 750px) {
+    font-size: 45px;
+  }
+
+  @media screen and (max-width: 500px) {
+    font-size: 30px;
+  }
+
+  @media screen and (max-width: 300px) {
+    font-size: 25px;
   }
 `;
 
@@ -718,7 +769,7 @@ const PartnerSection = () => {
 const PartnerWrapper = styled.div`
   width: calc(100vw - (100vw - 100%));
   padding: 60px 130px;
-  background-color: var(--red);
+  background-color: var(--color-red);
   display: flex;
   margin: 60px 0px 0px 0px;
 `;

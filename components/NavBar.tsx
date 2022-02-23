@@ -3,53 +3,92 @@ import { H5, ButtonText } from "./Theme";
 import Link from "next/link";
 import useWindowDimensions from "../hooks/useWindowDimensions";
 import { GiHamburgerMenu } from "react-icons/gi";
+import useToggle from "../hooks/useToggle";
 
 export const NavBar = () => {
   const { height, width } = useWindowDimensions();
+  const [showMobileNavBar, toggleShowMobileNavBar] = useToggle(false);
 
   if (width <= 1200) {
     return (
-      <Wrapper>
-        <img
-          src="logo.png"
-          width={`${width <= 900 ? "50px" : "120px"}`}
-          height={`${width <= 900 ? "50px" : "120px"}`}
-          style={{ cursor: "pointer" }}
-        />
-        <Menu>
-          <SpecialItem>VI</SpecialItem>
-          <GiHamburgerMenu
-            color="var(--red)"
-            size={`${width <= 900 ? "30px" : "60px"}`}
-          />
-        </Menu>
-      </Wrapper>
+      <>
+        <Wrapper>
+          <Link href="/" passHref>
+            <a style={{ cursor: "pointer" }}>
+              <img
+                src="/logo.png"
+                width={`${width <= 900 ? "40px" : "80px"}`}
+                height={`${width <= 900 ? "40px" : "80px"}`}
+              />
+            </a>
+          </Link>
+          <Menu>
+            <GiHamburgerMenu
+              color="var(--color-red)"
+              size={`${width <= 900 ? "30px" : "60px"}`}
+              style={{ cursor: "pointer" }}
+              onClick={() => toggleShowMobileNavBar()}
+            />
+          </Menu>
+        </Wrapper>
+        <MobileTab style={{ display: showMobileNavBar ? "block" : "none" }}>
+          <Link href="/" passHref>
+            <a>
+              <H5 style={{ color: "var(--color-red)" }}>Trang chủ</H5>
+            </a>
+          </Link>
+          <Link href="/ve-chung-toi" passHref>
+            <a>
+              <H5 style={{ color: "var(--color-red)" }}>Về chúng tôi</H5>
+            </a>
+          </Link>
+          <Link href="/hoat-dong" passHref>
+            <a>
+              <H5 style={{ color: "var(--color-red)" }}>Hoạt động</H5>
+            </a>
+          </Link>
+          <Link href="/bai-viet" passHref>
+            <a>
+              <H5 style={{ color: "var(--color-red)" }}>Bài viết</H5>
+            </a>
+          </Link>
+          <H5 style={{ color: "var(--color-red)" }}>Sản phẩm</H5>
+          <H5 style={{ color: "var(--color-red)" }}>Liên hệ</H5>
+        </MobileTab>
+      </>
     );
   }
 
   return (
     <Wrapper>
-      <img
-        src="logo.png"
-        width="121px"
-        height="128px"
-        style={{ cursor: "pointer" }}
-      />
+      <Link href="/" passHref>
+        <a style={{ cursor: "pointer" }}>
+          <img src="/logo.png" width="85px" height="90px" />
+        </a>
+      </Link>
       <Menu>
         <Link href="/" passHref>
           <a>
             <Item>Trang chủ</Item>
           </a>
         </Link>
+        <Link href="/ve-chung-toi" passHref>
+          <a>
+            <Item>Về chúng tôi</Item>
+          </a>
+        </Link>
         <Link href="/hoat-dong" passHref>
-          <Item>Hoạt động</Item>
+          <a>
+            <Item>Hoạt động</Item>
+          </a>
         </Link>
         <Link href="/bai-viet" passHref>
-          <Item>Bài viết</Item>
+          <a>
+            <Item>Bài viết</Item>
+          </a>
         </Link>
         <Item>Sản phẩm</Item>
         <Item>Liên hệ</Item>
-        <SpecialItem>VI</SpecialItem>
       </Menu>
     </Wrapper>
   );
@@ -57,8 +96,8 @@ export const NavBar = () => {
 
 const Wrapper = styled.nav`
   width: calc(100vw - (100vw - 100%));
-  height: 128px;
-  padding: 0 130px;
+  height: 90px;
+  padding: 0 min(5vw, 130px);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -86,15 +125,6 @@ const Menu = styled.li`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  column-gap: 85px;
-
-  @media screen and (max-width: 1600px) {
-    column-gap: 50px;
-  }
-
-  @media screen and (max-width: 1300px) {
-    column-gap: 30px;
-  }
 `;
 
 const Item = styled(H5)`
@@ -102,6 +132,15 @@ const Item = styled(H5)`
   color: #c82127;
   cursor: pointer;
   padding: 0;
+  margin-right: 85px;
+
+  @media screen and (max-width: 1700px) {
+    margin-right: 40px;
+  }
+
+  @media screen and (max-width: 1500px) {
+    margin-right: 30px;
+  }
 `;
 
 const SpecialItem = styled(ButtonText)`
@@ -118,6 +157,40 @@ const SpecialItem = styled(ButtonText)`
   @media screen and (max-width: 900px) {
     padding: 0px 10px;
     font-size: 16px;
+  }
+
+  margin-right: 85px;
+
+  @media screen and (max-width: 1700px) {
+    margin-right: 40px;
+  }
+
+  @media screen and (max-width: 1500px) {
+    margin-right: 30px;
+  }
+`;
+
+const MobileTab = styled.div`
+  position: -webkit-sticky;
+  position: sticky;
+  width: calc(100vw - (100vw - 100%));
+  height: calc(100vh - 90px);
+  overflow-y: auto;
+  background-color: white;
+  padding: 30px;
+  top: 90px;
+  z-index: 9999;
+
+  & H5 {
+    margin-bottom: 40px;
+    @media screen and (max-width: 900px) {
+      margin-bottom: 30px;
+    }
+  }
+
+  @media screen and (max-width: 900px) {
+    height: calc(100vh - 60px);
+    top: 60px;
   }
 `;
 

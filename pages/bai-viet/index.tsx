@@ -2,15 +2,22 @@ import styled from "styled-components";
 import NavBar from "../../components/NavBar";
 import { Body, H1, H4 } from "../../components/Theme";
 import { useState } from "react";
+import Head from "next/head";
 
-export const Articles = () => {
+export const Posts = () => {
   return (
-    <Wrapper>
-      <NavBar />
-      <Banner />
-      <ArticlesCard />
-      <ResearchCard />
-    </Wrapper>
+    <>
+      <Head>
+        <title>Bài viết</title>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      </Head>
+      <Wrapper>
+        <NavBar />
+        <Banner />
+        <ArticlesCard />
+        <ResearchCard />
+      </Wrapper>
+    </>
   );
 };
 
@@ -65,7 +72,7 @@ const ResearchCard = () => {
         >
           <div
             style={{
-              borderBottom: "60px solid var(--yellow)",
+              borderBottom: "60px solid var(--color-yellow)",
               borderRight: "40px solid transparent",
               height: "0px",
               width: "300px",
@@ -310,4 +317,4 @@ const MediumCard = styled.div<{ src: string }>`
   position: relative;
 `;
 
-export default Articles;
+export default Posts;
