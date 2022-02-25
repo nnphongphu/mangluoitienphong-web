@@ -24,7 +24,7 @@ export const NavBar = () => {
           </Link>
           <Menu>
             <GiHamburgerMenu
-              color="var(--color-red)"
+              color="var(--color-dark-red)"
               size={`${width <= 900 ? "30px" : "60px"}`}
               style={{ cursor: "pointer" }}
               onClick={() => toggleShowMobileNavBar()}
@@ -34,26 +34,41 @@ export const NavBar = () => {
         <MobileTab style={{ display: showMobileNavBar ? "block" : "none" }}>
           <Link href="/" passHref>
             <a>
-              <H5 style={{ color: "var(--color-red)" }}>Trang chủ</H5>
+              <Item>Trang chủ</Item>
             </a>
           </Link>
           <Link href="/ve-chung-toi" passHref>
             <a>
-              <H5 style={{ color: "var(--color-red)" }}>Về chúng tôi</H5>
+              <Item>Về chúng tôi</Item>
             </a>
           </Link>
           <Link href="/hoat-dong" passHref>
             <a>
-              <H5 style={{ color: "var(--color-red)" }}>Hoạt động</H5>
+              <Item>Hoạt động</Item>
             </a>
           </Link>
-          <Link href="/bai-viet" passHref>
+          <Link href="/bai-viet/tin-tuc" passHref>
             <a>
-              <H5 style={{ color: "var(--color-red)" }}>Bài viết</H5>
+              <Item>Tin tức</Item>
             </a>
           </Link>
-          <H5 style={{ color: "var(--color-red)" }}>Sản phẩm</H5>
-          <H5 style={{ color: "var(--color-red)" }}>Liên hệ</H5>
+          <Link href="/bai-viet/quan-diem" passHref>
+            <a>
+              <Item>Quan điểm</Item>
+            </a>
+          </Link>
+          <Link href="/bai-viet/tri-thuc-ban-dia" passHref>
+            <a>
+              <Item>Tri thức bản địa</Item>
+            </a>
+          </Link>
+          <Link href="/bai-viet/nghien-cuu" passHref>
+            <a>
+              <Item>Nghiên cứu</Item>
+            </a>
+          </Link>
+          <Item>Sản phẩm</Item>
+          <Item>Liên hệ</Item>
         </MobileTab>
       </>
     );
@@ -82,11 +97,31 @@ export const NavBar = () => {
             <Item>Hoạt động</Item>
           </a>
         </Link>
-        <Link href="/bai-viet" passHref>
-          <a>
-            <Item>Bài viết</Item>
-          </a>
-        </Link>
+        <Item>
+          Bài viết
+          <DropDown>
+            <Link href="/bai-viet/tin-tuc" passHref>
+              <a>
+                <Item>Tin tức</Item>
+              </a>
+            </Link>
+            <Link href="/bai-viet/quan-diem" passHref>
+              <a>
+                <Item>Quan điểm</Item>
+              </a>
+            </Link>
+            <Link href="/bai-viet/tri-thuc-ban-dia" passHref>
+              <a>
+                <Item>Tri thức bản địa</Item>
+              </a>
+            </Link>
+            <Link href="/bai-viet/nghien-cuu" passHref>
+              <a>
+                <Item>Nghiên cứu</Item>
+              </a>
+            </Link>
+          </DropDown>
+        </Item>
         <Item>Sản phẩm</Item>
         <Item>Liên hệ</Item>
       </Menu>
@@ -127,12 +162,30 @@ const Menu = styled.li`
   align-items: center;
 `;
 
+const DropDown = styled.div`
+  display: none;
+  position: absolute;
+  bottom: 0px - 100%;
+  left: 0;
+  background-color: var(--color-light);
+  padding: 30px;
+  width: max-content;
+  z-index: 9999;
+  & h5 {
+    padding: 15px 0;
+  }
+`;
+
 const Item = styled(H5)`
   text-transform: uppercase;
-  color: #c82127;
+  color: var(--color-dark-red);
   cursor: pointer;
   padding: 0;
   margin-right: 85px;
+  position: relative;
+  &:hover {
+    color: var(--color-red);
+  }
 
   @media screen and (max-width: 1700px) {
     margin-right: 40px;
@@ -141,6 +194,14 @@ const Item = styled(H5)`
   @media screen and (max-width: 1500px) {
     margin-right: 30px;
   }
+
+  @media screen and (max-width: 1200px) {
+    text-transform: none;
+  }
+
+  &:hover ${DropDown} {
+    display: block;
+  }
 `;
 
 const SpecialItem = styled(ButtonText)`
@@ -148,10 +209,10 @@ const SpecialItem = styled(ButtonText)`
   justify-content: center;
   align-items: center;
   padding: 3px 15px;
-  border: 1px solid #c82127;
+  border: 1px solid var(--color-dark-red);
   border-radius: 21px;
   text-transform: uppercase;
-  color: #c82127;
+  color: var(--color-dark-red);
   cursor: pointer;
 
   @media screen and (max-width: 900px) {
@@ -182,9 +243,9 @@ const MobileTab = styled.div`
   z-index: 9999;
 
   & H5 {
-    margin-bottom: 40px;
+    margin: 20px 0px;
     @media screen and (max-width: 900px) {
-      margin-bottom: 30px;
+      margin: 15px 0px;
     }
   }
 

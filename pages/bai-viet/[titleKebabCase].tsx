@@ -5,6 +5,8 @@ import { useRouter } from "next/router";
 import useGetPost from "../../hooks/post/useGetPost";
 import { Markup } from "interweave";
 import { H1, H5, Loading } from "../../components/Theme";
+import ReadMore from "../../components/ReadMore";
+import useGetPosts from "../../hooks/post/useGetPosts";
 
 export const Post = () => {
   const router = useRouter();
@@ -26,7 +28,7 @@ export const Post = () => {
       <Wrapper>
         <NavBar />
         <Container>
-          {isLoading && <Loading color="var(--color-red)" />}
+          {isLoading && <Loading color="var(--color-dark-red)" />}
           {!isLoading && !data && (
             <H1
               style={{ width: "100%", marginTop: "30px", textAlign: "center" }}
@@ -55,6 +57,7 @@ export const Post = () => {
               </div>
             </>
           )}
+          <ReadMore type="bai-viet" getData={useGetPosts()} />
         </Container>
       </Wrapper>
     </>
@@ -68,6 +71,7 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  overflow: hidden;
 `;
 
 const Container = styled.div`

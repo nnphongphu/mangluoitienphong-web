@@ -14,17 +14,16 @@ export const AboutPage = () => {
       <NavBar />
       <Wrapper>
         <PageIndicator>VỀ CHÚNG TÔI</PageIndicator>
-        <SubWrapper style={{ backgroundColor: "var(--color-red)" }}>
-          <H2 style={{ marginBottom: "30px", color: "white" }}>
-            MẠNG LƯỚI TIÊN PHONG LÀ GÌ
-          </H2>
+        <SubWrapper style={{ backgroundColor: "var(--color-dark-red)" }}>
           <H5 style={{ color: "white" }}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam
-            ipsum arcu, semper ut magna eget, lobortis ultrices massa.
-            Suspendisse facilisis felis eu nisl sollicitudin suscipit.
-            Ellentesque habitant morbi tristique senectus et netus et malesuada
-            fames ac turpis egestas. Mauris elementum ex ac enim luctus
-            scelerisque. Etiam ac congue risus.
+            Tiên Phong là mạng lưới vì tiếng nói dân tộc thiểu số Việt Nam với
+            sứ mệnh: Cùng nhau gìn giữ bản sắc văn hóa các dân tộc, bảo tồn và
+            phát huy tri thức bản địa. Tham gia vận động chính sách, và lan tỏa
+            đến xã hội nhằm tạo ra sự hiểu biết đúng đắn về người dân tộc thiểu
+            số, góp phần xây dựng một xã hội bình đẳng, đa dạng và phát triển
+            bền vững. Truyền cảm hứng đến với mọi người về tinh thần Tự hào - Tự
+            tin - Tự chủ nhằm bảo tồn phát huy những tri thức bản địa và giá trị
+            văn hóa hóa truyền thống của các dân tộc thiểu số.
           </H5>
         </SubWrapper>
         <IdentitySection />
@@ -84,28 +83,29 @@ const IdentitySection = () => {
             textAlign: "left",
             color: "white",
             textTransform: "uppercase",
+            marginBottom: "30px",
           }}
         >
-          Mạng lưới Tiên Phong là gì?
+          MẠNG LƯỚI CỦA CHÚNG TÔI
         </H2>
-        <H4 style={{ color: "white", textAlign: "left" }}>
-          1. Lorem ipsum dolor
+        <H4 style={{ color: "white", textAlign: "left", marginBottom: "15px" }}>
+          Mạng lưới Tiên Phong là nhóm thuộc các dân tộc thiểu số Việt Nam được
+          thành lập năm 2015. Đến nay nhóm đã có hơn 17 dân tộc trên 20 tỉnh
+          thành khác nhau.
         </H4>
-        <B style={{ textAlign: "left", width: "100%" }}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ipsum
-          arcu, semper ut magna eget, lobortis ultrices massa. Suspendisse
-          facilisis felis eu nisl sollicitudin suscipit. Pellentesque habitant
-          morbi tristique senectus et netus et malesuada fam
-        </B>
-        <H4 style={{ color: "white", textAlign: "left" }}>
-          2. Lorem ipsum dolor sit amet
+        {/* <B style={{ textAlign: "left", width: "100%", marginBottom: "30px" }}>
+          Mạng lưới Tiên Phong là nhóm thuộc các dân tộc thiểu số Việt Nam được
+          thành lập năm 2015. Đến nay nhóm đã có hơn 17 dân tộc trên 20 tỉnh
+          thành khác nhau.
+        </B> */}
+        <H4 style={{ color: "white", textAlign: "left", marginBottom: "15px" }}>
+          Hiện nay nhóm Tiên Phong vẫn đang mở rộng liên kết các nhóm dân tộc
+          khác cùng tham gia.
         </H4>
-        <B style={{ textAlign: "left", width: "100%" }}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ipsum
-          arcu, semper ut magna eget, lobortis ultrices massa. Suspendisse
-          facilisis felis eu nisl sollicitudin suscipit. Pellentesque habitant
-          morbi tristique senectus et netus et malesuada fam
-        </B>
+        {/* <B style={{ textAlign: "left", width: "100%", marginBottom: "30px" }}>
+          Hiện nay nhóm Tiên Phong vẫn đang mở rộng liên kết các nhóm dân tộc
+          khác cùng tham gia.
+        </B> */}
         <Sticker style={{ marginBottom: "30px" }}>
           Mạng lưới kết nối X người đến từ X tỉnh, thành phố khắp Việt Nam
         </Sticker>
@@ -119,32 +119,30 @@ const IdentitySection = () => {
     <IdentityWrapper>
       <IdentityContent>
         <H2 style={{ textAlign: "left", color: "white", marginBottom: "30px" }}>
-          Mạng lưới Tiên Phong là gì?
+          MẠNG LƯỚI CỦA CHÚNG TÔI
         </H2>
         <H4 style={{ color: "white", textAlign: "left", marginBottom: "15px" }}>
-          1. Lorem ipsum dolor
+          Mạng lưới Tiên Phong là nhóm thuộc các dân tộc thiểu số Việt Nam được
+          thành lập năm 2015. Đến nay nhóm đã có hơn 17 dân tộc trên 20 tỉnh
+          thành khác nhau.
         </H4>
-        <B style={{ textAlign: "left", width: "100%", marginBottom: "30px" }}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ipsum
-          arcu, semper ut magna eget, lobortis ultrices massa. Suspendisse
-          facilisis felis eu nisl sollicitudin suscipit. Pellentesque habitant
-          morbi tristique senectus et netus et malesuada fam
-        </B>
+        {/* <B style={{ textAlign: "left", width: "100%", marginBottom: "30px" }}>
+          Mạng lưới Tiên Phong là nhóm thuộc các dân tộc thiểu số Việt Nam được
+          thành lập năm 2015. Đến nay nhóm đã có hơn 17 dân tộc trên 20 tỉnh
+          thành khác nhau.
+        </B> */}
         <H4 style={{ color: "white", textAlign: "left", marginBottom: "15px" }}>
-          2. Lorem ipsum dolor sit amet
+          Hiện nay nhóm Tiên Phong vẫn đang mở rộng liên kết các nhóm dân tộc
+          khác cùng tham gia.
         </H4>
-        <B style={{ textAlign: "left", width: "100%", marginBottom: "30px" }}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ipsum
-          arcu, semper ut magna eget, lobortis ultrices massa. Suspendisse
-          facilisis felis eu nisl sollicitudin suscipit. Pellentesque habitant
-          morbi tristique senectus et netus et malesuada fam
-        </B>
+        {/* <B style={{ textAlign: "left", width: "100%", marginBottom: "30px" }}>
+          Hiện nay nhóm Tiên Phong vẫn đang mở rộng liên kết các nhóm dân tộc
+          khác cùng tham gia.
+        </B> */}
       </IdentityContent>
       <IdentityStickers>
-        <Sticker>
-          Mạng lưới kết nối X người đến từ X tỉnh, thành phố khắp Việt Nam
-        </Sticker>
-        <Sticker>Có X dân tộc đã tham gia vào Mạng lưới Tiên Phong</Sticker>
+        <Sticker>Mạng lưới kết nối 20 tỉnh, thành phố khắp Việt Nam</Sticker>
+        <Sticker>Có 17 dân tộc đã tham gia vào Mạng lưới Tiên Phong</Sticker>
       </IdentityStickers>
     </IdentityWrapper>
   );
@@ -189,7 +187,6 @@ const IdentityWrapper = styled.div`
   background-image: url("/map.png");
   background-repeat: no-repeat;
   background-position: center center;
-  background-attachment: fixed;
   background-size: contain;
 
   @media screen and (max-width: 1500px) {
@@ -211,13 +208,8 @@ const IdentityWrapper = styled.div`
 const IdentityContent = styled.div`
   display: flex;
   flex-direction: column;
-  row-gap: 30px;
   width: 50%;
   position: relative;
-
-  @media screen and (max-width: 1600px) {
-    row-gap: 15px;
-  }
 `;
 
 const B = styled.b`

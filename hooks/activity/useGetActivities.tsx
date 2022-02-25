@@ -3,7 +3,7 @@ import { useQuery } from "react-query";
 import toast from "react-hot-toast";
 
 export const useGetActivities = () => {
-  return useQuery(["activities"], getActivities, {
+  return useQuery(["activities"], () => getActivities(), {
     onError: (error) => {
       toast.error("Không tải được bài viết. Vui lòng thử lại");
     },

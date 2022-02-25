@@ -5,6 +5,9 @@ import { useRouter } from "next/router";
 import useGetActivity from "../../hooks/activity/useGetActivity";
 import { Markup } from "interweave";
 import { H1, H5, Loading } from "../../components/Theme";
+import ReadMore from "../../components/ReadMore";
+import useGetActivities from "../../hooks/activity/useGetActivities";
+import useGetInfiniteActivities from "../../hooks/activity/useGetInfiniteActivities";
 
 export const Activity = () => {
   const router = useRouter();
@@ -26,7 +29,7 @@ export const Activity = () => {
       <Wrapper>
         <NavBar />
         <Container>
-          {isLoading && <Loading color="var(--color-red)" />}
+          {isLoading && <Loading color="var(--color-dark-red)" />}
           {!isLoading && !data && (
             <H1
               style={{ width: "100%", marginTop: "30px", textAlign: "center" }}
@@ -55,6 +58,7 @@ export const Activity = () => {
               </div>
             </>
           )}
+          <ReadMore type="hoat-dong" getData={useGetInfiniteActivities()} />
         </Container>
       </Wrapper>
     </>
@@ -68,6 +72,7 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  overflow: hidden;
 `;
 
 const Container = styled.div`

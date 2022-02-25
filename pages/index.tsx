@@ -37,7 +37,7 @@ const PlaylistSection = () => {
     <ActivityWrapper>
       <H2
         style={{
-          color: "var(--color-red)",
+          color: "var(--color-dark-red)",
           textAlign: "left",
           fontWeight: "bold",
           margin: "30px 0px",
@@ -62,7 +62,7 @@ const PlaylistSection = () => {
 const VideoSection = () => {
   return (
     <>
-      <Video autoPlay muted loop>
+      <Video autoPlay muted loop style={{ maxWidth: "1920px" }}>
         <source src="/intro.mp4" type="video/mp4" />
       </Video>
     </>
@@ -119,7 +119,7 @@ const ParticipantsSection = () => {
     <ParticipantWrapper>
       <H2
         style={{
-          color: "var(--color-red)",
+          color: "var(--color-dark-red)",
           textAlign: "left",
           fontWeight: "bold",
           margin: "30px 0px",
@@ -231,186 +231,6 @@ const ParticipantWrapper = styled.div`
   }
 `;
 
-const IdentityWrapper = styled.div`
-  width: calc(100vw - (100vw - 100%));
-  height: 860px;
-  display: flex;
-  justify-content: space-between;
-  padding: 130px 130px 0px 130px;
-  background-color: #f6a320;
-  background-image: url("/map.png");
-  background-repeat: no-repeat;
-  background-position: top right;
-  @media screen and (max-width: 1500px) {
-    padding: 100px 100px 0px 100px;
-  }
-
-  @media screen and (max-width: 1200px) {
-    flex-direction: column;
-    padding: 30px 30px 0px 30px;
-    row-gap: 30px;
-    height: auto;
-
-    @media screen and (max-width: 900px) {
-      row-gap: 20px;
-    }
-  }
-`;
-
-const IdentityContent = styled.div`
-  display: flex;
-  flex-direction: column;
-  row-gap: 30px;
-  width: 50%;
-  position: relative;
-
-  @media screen and (max-width: 1600px) {
-    row-gap: 15px;
-  }
-`;
-
-const ButtonWrapper = styled.div`
-  display: flex;
-  position: absolute;
-  bottom: 0;
-`;
-
-const SquareButton = styled(ButtonText)<{ color: string }>`
-  width: 315px;
-  height: 170px;
-  background-color: ${({ color }) => color};
-  color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-transform: uppercase;
-  padding: 40px;
-
-  @media screen and (max-width: 900px) {
-    padding: 20px;
-    height: auto;
-  }
-`;
-
-const IdentitySection = () => {
-  const { width, height } = useWindowDimensions();
-  if (width <= 1200) {
-    return (
-      <IdentityWrapper>
-        <H2
-          style={{
-            textAlign: "left",
-            color: "white",
-            textTransform: "uppercase",
-          }}
-        >
-          Mạng lưới Tiên Phong là gì?
-        </H2>
-        <H4 style={{ color: "white", textAlign: "left" }}>
-          1. Lorem ipsum dolor
-        </H4>
-        <B style={{ textAlign: "left", width: "100%" }}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ipsum
-          arcu, semper ut magna eget, lobortis ultrices massa. Suspendisse
-          facilisis felis eu nisl sollicitudin suscipit. Pellentesque habitant
-          morbi tristique senectus et netus et malesuada fam
-        </B>
-        <H4 style={{ color: "white", textAlign: "left" }}>
-          2. Lorem ipsum dolor sit amet
-        </H4>
-        <B style={{ textAlign: "left", width: "100%" }}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ipsum
-          arcu, semper ut magna eget, lobortis ultrices massa. Suspendisse
-          facilisis felis eu nisl sollicitudin suscipit. Pellentesque habitant
-          morbi tristique senectus et netus et malesuada fam
-        </B>
-        <Sticker>
-          Mạng lưới kết nối X người đến từ X tỉnh, thành phố khắp Việt Nam
-        </Sticker>
-        <Sticker style={{ alignSelf: "flex-end" }}>
-          Có X dân tộc đã tham gia vào Mạng lưới Tiên Phong
-        </Sticker>
-        <div
-          style={{ display: "flex", width: "100%", justifyContent: "center" }}
-        >
-          <SquareButton color="#C82127">Đọc thêm về Tiên Phong</SquareButton>
-          <SquareButton color="#EE5A2A">
-            Xem sản phẩm của chúng tôi
-          </SquareButton>
-        </div>
-      </IdentityWrapper>
-    );
-  }
-  return (
-    <IdentityWrapper>
-      <IdentityContent>
-        <H2 style={{ textAlign: "left", color: "white" }}>
-          Mạng lưới Tiên Phong là gì?
-        </H2>
-        <H4 style={{ color: "white", textAlign: "left" }}>
-          1. Lorem ipsum dolor
-        </H4>
-        <B style={{ textAlign: "left", width: "100%" }}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ipsum
-          arcu, semper ut magna eget, lobortis ultrices massa. Suspendisse
-          facilisis felis eu nisl sollicitudin suscipit. Pellentesque habitant
-          morbi tristique senectus et netus et malesuada fam
-        </B>
-        <H4 style={{ color: "white", textAlign: "left" }}>
-          2. Lorem ipsum dolor sit amet
-        </H4>
-        <B style={{ textAlign: "left", width: "100%" }}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ipsum
-          arcu, semper ut magna eget, lobortis ultrices massa. Suspendisse
-          facilisis felis eu nisl sollicitudin suscipit. Pellentesque habitant
-          morbi tristique senectus et netus et malesuada fam
-        </B>
-        <ButtonWrapper>
-          <SquareButton color="#C82127">Đọc thêm về Tiên Phong</SquareButton>
-          <SquareButton color="#EE5A2A">
-            Xem sản phẩm của chúng tôi
-          </SquareButton>
-        </ButtonWrapper>
-      </IdentityContent>
-      <IdentityStickers>
-        <Sticker>
-          Mạng lưới kết nối X người đến từ X tỉnh, thành phố khắp Việt Nam
-        </Sticker>
-        <Sticker>Có X dân tộc đã tham gia vào Mạng lưới Tiên Phong</Sticker>
-      </IdentityStickers>
-    </IdentityWrapper>
-  );
-};
-
-const IdentityStickers = styled.div`
-  display: flex;
-  flex-direction: column;
-  padding-top: 80px;
-  row-gap: 50px;
-`;
-
-const Sticker = styled(H5)`
-  width: 407px;
-  height: 178px;
-  background: #ffffff;
-  border-radius: 0px 30px;
-  color: #363636;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 30px;
-
-  @media screen and (max-width: 1200px) {
-    width: 60vw;
-  }
-
-  @media screen and (max-width: 900px) {
-    padding: 20px;
-    height: 100px;
-    width: 60vw;
-  }
-`;
-
 const ActivityWrapper = styled.div`
   width: calc(100vw - (100vw - 100%));
   display: flex;
@@ -426,26 +246,6 @@ const ActivityWrapper = styled.div`
   }
 `;
 
-const Button = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 10px 30px;
-  border-radius: 21px;
-  font-style: normal;
-  font-weight: 600;
-  font-size: 24px;
-  font-family: Fira Sans;
-  line-height: 29px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  background-color: #c82127;
-  color: white;
-  cursor: pointer;
-  width: fit-content;
-  align-self: center;
-`;
-
 const ImageWrapper = styled.div`
   width: 100%;
   display: grid;
@@ -457,18 +257,25 @@ const ImageWrapper = styled.div`
   }
 `;
 
-const ImageText = styled(H4)`
+const ImageTextWrapper = styled.div`
   color: white;
   width: 100%;
   position: absolute;
+  padding: 30px 30px 30px 30px;
+  display: -webkit-box;
+  bottom: 0;
+  transition: all ease-in-out 0.2s;
+`;
+
+const ImageText = styled(H4)`
+  color: white;
   text-align: center;
-  padding: 30px 30px 0px 30px;
-  bottom: 30px;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
+  transition: all ease-in-out 0.2s;
 `;
 
 const ImageCard = styled.a<{ src: string }>`
@@ -486,22 +293,8 @@ const ImageCard = styled.a<{ src: string }>`
   align-items: flex-end;
   position: relative;
 
-  box-shadow: 0px 0px 0px var(--color-yellow) inset;
-  transition: all ease-in-out 0.2s;
-  &:hover {
-    box-shadow: 0px -150px 0px var(--color-yellow) inset;
-
-    @media screen and (max-width: 1300px) {
-      box-shadow: 0px -110px 0px var(--color-yellow) inset;
-    }
-
-    @media screen and (max-width: 1000px) {
-      box-shadow: 0px -100px 0px var(--color-yellow) inset;
-    }
-
-    @media screen and (max-width: 500px) {
-      box-shadow: 0px -75px 0px var(--color-yellow) inset;
-    }
+  &:hover ${ImageTextWrapper} {
+    background-color: var(--color-yellow);
   }
 
   @media screen and (max-width: 500px) {
@@ -517,7 +310,7 @@ const ActivitySection = () => {
     <ActivityWrapper>
       <H2
         style={{
-          color: "var(--color-red)",
+          color: "var(--color-dark-red)",
           textAlign: "left",
           fontWeight: "bold",
           margin: "30px 0px",
@@ -525,7 +318,7 @@ const ActivitySection = () => {
       >
         CẬP NHẬT
       </H2>
-      {isLoading && <Loading color="var(--color-red)" />}
+      {isLoading && <Loading color="var(--color-dark-red)" />}
       {!isLoading && data && (
         <ImageWrapper
           style={{
@@ -543,7 +336,9 @@ const ActivitySection = () => {
                 passHref
               >
                 <ImageCard src={update.thumbnailUrl}>
-                  <ImageText>{update.title}</ImageText>
+                  <ImageTextWrapper>
+                    <ImageText>{update.title}</ImageText>
+                  </ImageTextWrapper>
                 </ImageCard>
               </Link>
             );
@@ -556,7 +351,7 @@ const ActivitySection = () => {
 
 const IntroductionWrapper = styled.div`
   width: calc(100vw - (100vw - 100%));
-  background-color: #c82127;
+  background-color: var(--color-dark-red);
   padding: 0px 160px;
   display: flex;
   justify-content: space-between;
@@ -628,25 +423,56 @@ const IntroductionSection = () => {
 };
 
 const LandingSection = () => {
+  const ref = useRef<any>();
+  const { width } = useWindowDimensions();
   return (
-    <LandingWrapper>
-      {/* <HiddenImage src="hero.jpg" /> */}
-      <LandingText>Mạng lưới Tiên phong</LandingText>
-      <Subtitle>vì tiếng nói của người dân tộc thiểu số</Subtitle>
-    </LandingWrapper>
+    <LandingSuperWrapper>
+      <LandingWrapper
+        style={{
+          overflow: "hidden",
+          position: width >= 900 ? "absolute" : "static",
+        }}
+        onMouseMove={(e) => {
+          const mouseRadius = width <= 900 ? 50 : 150;
+          if (ref.current) {
+            ref.current.style.left = e.pageX - mouseRadius + "px";
+            ref.current.style.top = e.pageY - mouseRadius + "px";
+          }
+        }}
+        onMouseEnter={() => {
+          if (ref.current) ref.current.style.display = "block";
+        }}
+        onMouseLeave={() => {
+          if (ref.current) ref.current.style.display = "none";
+        }}
+      >
+        {width >= 900 && <HiddenImage ref={ref} src="/hero.jpg" />}
+        <LandingText style={{ pointerEvents: "none" }}>
+          Mạng lưới Tiên phong
+        </LandingText>
+        <Subtitle style={{ pointerEvents: "none" }}>
+          vì tiếng nói của người dân tộc thiểu số
+        </Subtitle>
+      </LandingWrapper>
+    </LandingSuperWrapper>
   );
 };
 
-// const HiddenImage = styled.div<{ src: string }>`
-//   background: url(${({ src }) => src}) 50% 50% no-repeat fixed;
-//   background-position: center center;
-//   z-index: 1;
-//   position: absolute;
-//   width: 300px;
-//   height: 300px;
-//   background-size: cover;
-//   border-radius: 50%;
-// `;
+const HiddenImage = styled.div<{ src: string }>`
+  background: linear-gradient(rgba(255, 0, 0, 0.4), rgba(255, 0, 0, 0.4)),
+    url(${({ src }) => src}) no-repeat fixed;
+  background-position: center center;
+  z-index: 1;
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+
+  @media screen and (max-width: 900px) {
+    width: 100px;
+    height: 100px;
+  }
+`;
 
 const ReadMoreButton = styled.a`
   padding: 30px;
@@ -668,7 +494,7 @@ const ReadMoreButton = styled.a`
 `;
 
 const Subtitle = styled.span`
-  color: var(--color-red);
+  color: var(--color-dark-red);
   font-family: Fira Sans;
   font-style: normal;
   font-weight: bold;
@@ -689,6 +515,26 @@ const Subtitle = styled.span`
   }
 `;
 
+const LandingSuperWrapper = styled.div`
+  width: calc(100vw - (100vw - 100%));
+  height: calc(100vh - 90px);
+  max-width: 1920px;
+  margin: auto;
+  min-height: 600px;
+  max-height: 1080px;
+
+  @media screen and (max-width: 900px) {
+    height: calc(100vh - 60px);
+    padding: 0px 0px 50px 0px;
+    min-height: 300px;
+    max-height: 700px;
+  }
+
+  @media screen and (max-width: 800px) {
+    height: 300px;
+  }
+`;
+
 const LandingWrapper = styled.div`
   width: calc(100vw - (100vw - 100%));
   height: calc(100vh - 90px);
@@ -698,7 +544,17 @@ const LandingWrapper = styled.div`
   justify-content: center;
   min-height: 600px;
   max-height: 1080px;
+  max-width: 1920px;
+  margin: auto;
   z-index: 0;
+  background-image: linear-gradient(
+      rgba(255, 255, 255, 0.8),
+      rgba(255, 255, 255, 0.8)
+    ),
+    url("/hero.jpg");
+  background-attachment: fixed;
+
+  background-position: center center;
 
   @media screen and (max-width: 900px) {
     height: calc(100vh - 60px);
@@ -715,13 +571,14 @@ const LandingWrapper = styled.div`
 const LandingText = styled(H1)`
   font-size: min(max(20vh, 150px), 150px);
   line-height: normal;
-  color: #c82127;
+  color: --color-dark-red;
   text-align: center;
   font-weight: bolder;
   margin: 0;
   z-index: 2;
   background-image: linear-gradient(rgba(255, 0, 0, 0.4), rgba(255, 0, 0, 0.4)),
     url("/hero.jpg");
+  background-attachment: fixed;
   background-position: center center;
   background-repeat: repeat;
   -webkit-background-clip: text;
@@ -769,7 +626,7 @@ const PartnerSection = () => {
 const PartnerWrapper = styled.div`
   width: calc(100vw - (100vw - 100%));
   padding: 60px 130px;
-  background-color: var(--color-red);
+  background-color: var(--color-dark-red);
   display: flex;
   margin: 60px 0px 0px 0px;
 `;

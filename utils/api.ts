@@ -91,24 +91,27 @@ export const getFeaturedActivities = async () => {
     query(
       collection(db, "activity"),
       where("isFeatured", "==", true),
-      orderBy("createdAt", "desc"),
-      limit(15)
+      orderBy("publishedAt", "desc")
     )
   );
   let data: any = [];
   snapshot.forEach((doc) => {
-    if (doc.data().status === "PUBLISHED")
-      data.push(FBDataToObject({ ...doc.data(), id: doc.id }));
+    data.push(FBDataToObject({ ...doc.data(), id: doc.id }));
   });
   return data.slice(0, 3);
 };
 
-export const getActivities = async () => {
+export const getActivities = async (RTimestamp?: string) => {
+  const CRTimestamp = RTimestamp
+    ? Timestamp.fromDate(new Date(RTimestamp))
+    : Timestamp.fromDate(new Date());
+  console.log("Hiii");
   const snapshot = await getDocs(
     query(
       collection(db, "activity"),
       where("status", "==", "PUBLISHED"),
       orderBy("createdAt", "desc"),
+      startAfter(CRTimestamp),
       limit(8)
     )
   );
@@ -132,6 +135,88 @@ export const getPosts = async (RTimestamp?: string) => {
       limit(8)
     )
   );
+  let data: any = [];
+  snapshot.forEach((doc) => {
+    data.push(FBDataToObject({ ...doc.data(), id: doc.id }));
+  });
+  return data;
+};
+
+export const getActivitiesByCategory = async (
+  category: string,
+  RTimestamp?: string
+) => {
+  const CRTimestamp = RTimestamp
+    ? Timestamp.fromDate(new Date(RTimestamp))
+    : Timestamp.fromDate(new Date());
+  const snapshot = await getDocs(
+    query(
+      collection(db, "activity"),
+      where("category", "==", category),
+      orderBy("publishedAt", "desc"),
+      startAfter(CRTimestamp),
+      limit(3)
+    )
+  );
+  let data: any = [];
+  snapshot.forEach((doc) => {
+    data.push(FBDataToObject({ ...doc.data(), id: doc.id }));
+  });
+  return data;
+};
+
+export const getCategories = async () => {
+  const snapshot = await getDocs(
+    query(collection(db, "category"), orderBy("createdAt", "desc"))
+  );
+  let data: any = [];
+  snapshot.forEach((doc) => {
+    data.push(FBDataToObject({ ...doc.data(), id: doc.id }));
+  });
+  return data;
+};
+
+export const getPostsByCategory = async (
+  category: string,
+  RTimestamp?: string
+) => {
+  const CRTimestamp = RTimestamp
+    ? Timestamp.fromDate(new Date(RTimestamp))
+    : Timestamp.fromDate(new Date());
+  const snapshot = await getDocs(
+    query(
+      collection(db, "post"),
+      where("category", "==", category),
+      orderBy("publishedAt", "desc"),
+      startAfter(CRTimestamp),
+      limit(8)
+    )
+  );
+  let data: any = [];
+  snapshot.forEach((doc) => {
+    data.push(FBDataToObject({ ...doc.data(), id: doc.id }));
+  });
+  return data;
+};
+
+export const getFeaturedPostsByCategory = async (
+  category: string,
+  RTimestamp?: string
+) => {
+  const CRTimestamp = RTimestamp
+    ? Timestamp.fromDate(new Date(RTimestamp))
+    : Timestamp.fromDate(new Date());
+  const snapshot = await getDocs(
+    query(
+      collection(db, "post"),
+      where("category", "==", category),
+      orderBy("publishedAt", "desc"),
+      orderBy("isFeatured", "desc"),
+      startAfter(CRTimestamp),
+      limit(3)
+    )
+  );
+
   let data: any = [];
   snapshot.forEach((doc) => {
     data.push(FBDataToObject({ ...doc.data(), id: doc.id }));

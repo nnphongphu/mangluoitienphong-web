@@ -5,6 +5,7 @@ export const H1 = styled.h1`
   font-style: normal;
   font-weight: bold;
   font-size: 96px;
+  line-height: 140%;
   color: #000000;
 
   @media screen and (max-width: 1500px) {
